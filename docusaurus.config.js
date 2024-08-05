@@ -34,6 +34,8 @@ const config = {
     locales: ['en'],
   },
 
+  
+
   presets: [
     [
       'classic',
@@ -41,18 +43,19 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
+          routeBasePath: '/',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
+        /*blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
+        },*/
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -66,7 +69,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        //title: 'My Site',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -76,20 +79,20 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Academy',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
-          {
+         // {to: '/blog', label: 'Blog', position: 'left'},
+          /*{
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
             position: 'right',
-          },
+          },*/
         ],
       },
       footer: {
         style: 'dark',
         links: [
-          {
+         /* {
             title: 'Docs',
             items: [
               {
@@ -98,7 +101,7 @@ const config = {
               },
             ],
           },
-          {
+          /*{
             title: 'Community',
             items: [
               {
@@ -117,7 +120,7 @@ const config = {
           },
           {
             title: 'More',
-            items: [
+            /*items: [
               {
                 label: 'Blog',
                 to: '/blog',
@@ -127,14 +130,14 @@ const config = {
                 href: 'https://github.com/facebook/docusaurus',
               },
             ],
-          },
+          },*/
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
-      },
+        copyright: `Copyright © ${new Date().getFullYear()} eaqbe ALL RIGHTS RESERVED.`,
+      }, 
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-      },
+      }, 
     }),
 };
 

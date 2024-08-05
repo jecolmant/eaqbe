@@ -5,14 +5,16 @@
  */
 
 /* You can override the default Infima variables here. */
+
+/*@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');*/
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #a6131f;
+  --ifm-color-primary-dark: #95111c;
+  --ifm-color-primary-darker: #8d101a;
+  --ifm-color-primary-darkest: #740d16;
+  --ifm-color-primary-light: #b71522;
+  --ifm-color-primary-lighter: #bf1624;
+  --ifm-color-primary-lightest: #d81928;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
@@ -27,4 +29,49 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 996px) {
+  :root {
+    --ifm-font-size-base: 18px;
+  }
+  article header h1 {
+    font-size: 1.5rem !important;
+  }
+  .hero .hero__title {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 997px) {
+  :root {
+    --ifm-font-size-base: 17px;
+  }
+  article header h1 {
+    font-size: 2rem !important;
+  }
+}
+
+/*
+:root {
+  --ifm-font-family-base: 'Open Sans';
+}
+
+article {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar .navbar__items {
+  flex: auto;
+}
+
+.dropdown__link {
+  font-size: inherit;
+}
+
+/* Remove shadow on the left */
+:root {
+  --ifm-global-shadow-md: 0px;
 }

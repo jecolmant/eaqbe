@@ -1,9 +1,8 @@
 ---
-sidebar_position: 1
-slug: /
+sidebar_position: 2
 ---
 
-# Welcome
+# Hello
 
 Let's discover **Docusaurus in less than 5 minutes**.
 
