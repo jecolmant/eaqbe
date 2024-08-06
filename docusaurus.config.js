@@ -134,9 +134,15 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} eaqbe ALL RIGHTS RESERVED.`,
       }, 
+      
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+      },
+      
+      colorMode: {
+        disableSwitch: true, // Disable the dark mode toggle switch
+        defaultMode: 'light',  // Set the default mode to light
       }, 
     }),
 };
