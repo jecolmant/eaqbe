@@ -1,4 +1,104 @@
 ---
 sidebar_position: 1
 ---
-# 1.1. The Universe of Data
+# The Universe of Data
+
+L'apparition d'agents conversationnels utilisant un modèle dit d'intelligence artificielle générative, représente une certaine évolution dans l'adoption de l'apprentissage automatique, par l'ensemble de la population et la plupart des entreprises. Les approches statistiques utilisées pour la création de tels modèles existent pourtant depuis le milieu du 20e siècle, mais cette évolution - la reproduction d'une conversation proche de capacités humaines voire mieux pour certains cas -, est fortement liée à la démocratisation de nouvelles technologies, et plus particulièrement les GPU, Graphic Process Unit permettant l'efficience de calculs et donc la création de modèles complexes. Comme tout avènement disruptif dans l'évolution d'une société, l'apparition de cette nouvelle technologie a donné lieu à une forme de "bulle" sur le concept même de l'intelligence artificielle.
+
+Dans cette première partie, nous allons mieux comprendre ce qu'est l'apprentissage automatique et surtout, démocratiser un certain lexique lié à ce domaine afin de démistyfier le concept et comprendre les relations et différences  entre l'intelligence artificielle, l'apprentissage automatique ou machine learning, les réseaux de neurones ou deep learning, la statistique et les mathématiques, ainsi que l'informatique décisionnelle.
+
+Ils ont, malgré tout, tous un point commun : celui de faire partie de la grande famille des sciences des données.
+
+## L'intelligence artificielle
+
+«Nous nous sommes émerveillés de notre propre magnificence en donnant naissance à l'"A.I."». Cette réplique provient du film de Sciences-Fiction "Matrix" sorti en 1999. Les réalisateurs n'étaient pas spécialement avant-gardistes sur la question. En effet, l'intelligence artificielle, du moins l'utilisation du terme, est apparue en 1956 grâce à deux pionniers dans le domaine : John McCarthy & Marvin Lee Minsky.
+
+Et pourtant, cette appellation est en pleine période de gloire depuis l'apparition, ces dernières années, de modèles dit "NLP" pour Natural Language Processing qui permettent de créer des interactions entre les ordinateurs et les humains en utilisant le langage naturel.
+
+En 1956, L'intelligence artificielle était définie comme étant « la construction de programmes informatiques qui s’adonnent à des tâches qui sont, pour l’instant, accomplies de façon plus satisfaisante par des êtres humains car elles demandent des processus mentaux de haut niveau tels que : l’apprentissage perceptuel, l’organisation de la mémoire et le raisonnement critique».
+
+Nous retrouvons deux notions fondamentales : l'intelligence artificielle générale (IAG) qui serait une AI capable de réaliser ou d'apprendre des tâches cognitives qui jusqu'à présent étaient propres aux humains ou aux animaux, et l'intelligence artificielle de type faible (Narrow AI). La littérature à ce sujet est diversifé. Le terme AI s'étant fortement démocratisé ; de nombreux articles relèvent comme définition d'une A.I faible (ou simple) le concept de base de ce qui relève en réalité du Machine Learning, et la définition l'A.I. de type général comme étant par exemple les modèles de language naturel entre les ordinateurs et les humains. 
+
+Toutefois, de nombreux auteurs auxquels je me joins relèvent que la définition de l'intelligence intègre les notions de logique, de conscience de soi, d'apprentissage, d'intelligence émotionnelle et de créativité. Nous reprenons la définition suivante de l'intelligence artficielle :
+
+<div className="pmargin">
+  <div className="indentp">
+    *"Ensemble des théories et des techniques développant des programmes informatiques complexes capables de simuler certains traits de l'intelligence humaine (raisonnement, apprentissage…)"*.
+  </div>
+</div>
+
+## Machine Learning
+
+La définition de l'intelligence artificielle permet de mettre en avant un concept fondamental, souvent oublié : le machine learning est une forme d'intelligence artificielle. En effet, Il s'agit d'un champ d'étude de l'intelligence artificielle, plus particulièrement l'apprentissage, qui est définit comme étant le fait de  : 
+
+<div className="pmargin">
+  <div className="indentp">
+    *"programmer des machines afin qu’elles puissent apprendre des données dans le but d’automatiser des tâches complexes.
+"*.
+  </div>
+</div>
+
+Faire du "machine learning" c'est  finalement prendre le rôle de professeur pour un ordinateur et lui apprendre sur base de données à réaliser une tâche. Qu'il s'agisse de techniques considérées comme supervisées (où la machine reçoit des données d'entrainnement labélisées) ou de techniques non supervisées (on nourrit un ordinateur de données et on le programme pour faire une tâche - par exemple segmenter des données). Dans les deux cas, l'ordinateur va apprendre, à un tel point que lorsqu'il aura fini son apprentissage, il va lui même apprendre de nouvelle règle.
+
+La littérature reprend souvent comme exemple la programmation d'un ordinateur pour identifier des emails entrants comme étant des spam ou des non spam. Dans cet exemple, nous apprenons à l'ordinateur que lorsqu'il découvre certains mots dans un email (par exemple "gratuit", "lotterie", "argent"), il y a une forte probabilité qu'il s'agisse d'un SPAM. A contrario, lorsqu'il identifie les mot "ami", "repas", "cordialement" dans un email, il y a une forte probabilité pour que soit un non spam (un email autorisé). 
+
+L'ordinateur a appris et va maintenant classer les emails en tant que Spam ou non Spam. Ce qui est intéressant en machine learning, c'est que lorsque l'on va arrêter d'être un professeur pour la machine, elle va continuer à apprendre et définir des règles. Par exemple, la machine identifie que dans la plupart des spams identifiés grâce à la combinaison ou la combinaison partielle des mots "gratuit", "lotterie" et  "argent", il y a régulièrement le mot "bitcoin" qui est présent. Dorénavant, la machine va considérer le mot "bitcoin" comme étant fondateur dans la probabilité de classer un email comme étant un spam.
+
+## Deep Learning
+
+Le deep learning se définit comme :
+
+<div className="pmargin">
+  <div className="indentp">
+    *"Un type d'apprentissage automatique  basé sur des réseaux neuronaux artificiels dans lesquels plusieurs couches de traitement sont utilisées pour extraire des données des caractéristiques de niveau progressivement plus élevé.
+"*.
+  </div>
+</div>
+
+En nous référant à cette définition, nous comprenons qu'il s'agit d'une technique de machine learning qui repose sur un modèle particulier : les "réseaux de neurones". 
+
+Nous avons toujours fonctionné par mimétisme de ce que nous offrait la nature, et en l'occurence, dans le cas des réseaux de neurones, l'Homme (avec un grand H) a tenté de reproduire de manière informatique le fonctionnement d'un cerveau humain. Il est toutefois important de rappeler que même si la science fait des avancées majeures chaque année, la médecine ne maitrise pas encore tous les concepts du fonctionnement cérébral d'un être humain, raison pour laquelle l'intelligence artficielle forte, ne pourrait encore exister.
+
+Ajoutons à cela, que si nous avons fait des avancées majeures dans ce que l'on appelle la famille de l'A.I. faible ces dernières années, c'est notamment grâce à deux ingrédients : d'une part la quantité de données disponible à traiter et permettant donc d'améliorer un apprentissage, et d'autre part, l'évolution des cartes graphiques et l'apparition des GPU (Graphic Processing Unit) qui sont en réalité des puces informatiques ajoutées sur les cartes graphiques afin d'optimiser le rendu d'images. Ces GPU peuvent également être utilisés pour réaliser, de manière simultanée, un ensemble de calculs, libérant ainsi l'utilisation du CPU (processeur central de l'ordinateur).
+
+Ces calculs simultanés ont permis d'utiliser, de manière efficiente, l'un des algorithmes les plus prometteurs du machine learning, à savoir les réseaux de neurones. Pourtant, si l'on fait un zoom sur le fonctionnement d'un réseau de neurones et que nous isolons le fonctionnement de chaque neurones, nous retrouvons ce que nous avons à l'origine du machine learning, à savoir la régression linéaire ou la régression logistique. Chaque fonction d'activation d'un neurone pourrait en effet être comparé à une régression linéaire ou à une régression logistique qui, à son tour va activer une autre fonction. Bien entendu, l'évolution et l'optimisation de tels modèles nous a permis de faire évoluer ces fonctions(RELU, Softmax) plus adaptées selon les cas et selon le fait que nous soyons dans des couches cachées ou dans une couche de sortie d'un réseau.
+
+Cet algorithme est prometteur car en effet, il utilise les GPU - ce qui rend le calcul très rapide et moins gourmand pour une machine, il accepte tout type de données (structurées, semi structurées et également non structurées (audio, image,...)) - et surtout, en tant que modèle paramétrique (cf régression linéaire et logistique), il permet d'utiliser une méthode d'optimisation d'entrainnement (de définition des paramètres) plus rapide que le gradient descent pour trouver l'optimal local, à savoir l'algorithme d'optimisation Adam.
+
+Il y a également une particularité qui différencie les réseaux de neurones de tous les autres modèles utilisés en machine learning : la manière dont il procède dans les couches cachées n'est pas identifiable. Prenons l'exemple suivant, repris par Andrew Ng, chercheur au département de Sciences informatiques à l'université de Stanford et auteur de la spécialisation en Machine learning de Deeplearning.AI. 
+
+## Statistique
+
+Nous retrouvons à la base de tout : la statistique, un domaine des mathématiques. Pour pouvoir réaliser un apprentissage, le machine learning (également appelé apprentissage automatique, apprentissage artificiel ou apprentissage statistique) va tirer ses fondements sur des approches statistiques. 
+
+La statistique se définit comme: 
+
+<div className="pmargin">
+  <div className="indentp">
+    *"Ensemble des méthodes qui ont pour objet la collecte, le traitement et l'interprétation de ces données."*.
+  </div>
+</div>
+
+
+Pour mieux comprendre le lien entre le machine learning et la statistique, il est important d'évoquer deux notions supplémentaire, à savoir les rôles et différences entre un algorithme et un modèle en machine learning.
+
+Un algorithme représente l'ensemble de la procédure appliquée à des données pour créer un modèle de machine learning. Le modèle est donc ce que la machine a appris alors que l'algorithme est le développement de son apprentissage qui s'effectue à l'aide des approches statistiques et mathématiques.
+
+On va donc utiliser des techniques existantes depuis le milieu du 20e siècle et issues des statistiques (régression linéaire, régression logistique, réseaux de neurones, K-Nearest-Neighbors, classifieur Naïf Bayésien, détection d'anomalie, analyse an composantes principales, Règles d'association, Clustering, Filtrage Collaboratif,...) appliquées sur de grands ensembles de données à l'aide de machines puissantes, et dans le cadre de la procédure, qui seront capable in fine de maintenir un apprentissage constant, c'est à dire de créer de nouvelles règles ou mettre en avant de nouvelles tendances cachées. C'est d'ailleurs la raison pour laquelle un modèle en machine learning doit être revu, corrigé et adapté de manière continue.
+
+## Business Intelligence
+
+L'informatique décisionnelle, également appelée Business intelligence ou BI fait également partie de la famille des sciences des données. Elle utilise également les statistiques.
+
+<div className="pmargin">
+  <div className="indentp">
+    *La B.I. désigne les technologies, applications et pratiques de collecte, d'intégration, d'analyse et de présentation de l'information. C'est un système d'aide à la prise de décision.*
+  </div>
+</div>
+
+L'informatique décisionnelle utilise des outils dont la plupart offrent des solutions complètes pour se connecter et extraire l'information d'une ou plusieurs sources de données, transformer et préparer cette information pour la rendre exploitable, modéliser les données afin d'améliorer l'efficience des requêtes et enfin l'application des techniques de data visualisation pour représenter l'information de manière synthétique et claire et permettre de prendre des décisions informées.
+
+A contrario du machine learning, l'informatique décisionnelle est limitée à l'exploitation de données structurées ou semi-structurées et ne permet pas de faire de prédictions sur des données multivariées. L'informatique décisionnelle aide à la plannification stratégique de l'entreprise et permet de répondre aux questions : "quelles sont les performances de mon entreprise aujourd'hui et quelles étaient les performances passées de mon entreprise".
+
+Les outils en informatique décisionnelle sont de plus en plus automatisés notamment par des modèles de machine learning afin d'aider les utilisateurs à analyser les données, faire des choix sur les visualisation et également jusqu'à créer des visualization "à la demande" sur base d'une question vocale.
+

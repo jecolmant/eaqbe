@@ -99,3 +99,41 @@ article {
   padding-bottom: 1rem; /* Adjust bottom padding */
 }
 
+p {
+  text-align: justify;
+}
+
+.indentp {
+  padding-left: 40px; /* Ajustez la valeur pour l'indentation souhaitée */
+}
+
+.pmargin {
+  margin-top: 20px; /* Ajustez la valeur pour la marge souhaitée */
+}
+
+/* Styles pour la classe "custom-admonition" */
+.customtip {
+  background-color: #d4d1d1; /* Couleur de fond bleu clair */
+  border-color: #000000;    /* Couleur de bordure bleu clair */
+  padding: 15px;            /* Espacement intérieur */
+  margin-bottom: 20px;      /* Marge inférieure */
+}
+
+/* Styles pour le titre de l'admonition */
+.customtip-title {
+  background-color: #999da1; /* Couleur de fond légèrement plus foncée pour le titre */
+  padding: 10px;             /* Espacement intérieur du titre */
+  margin-bottom: 10px;       /* Marge inférieure du titre */
+  font-weight: bold;        /* Titre en gras */
+}
+
+/* 
+html[data-theme='dark'] .customtip {
+  background-color: #1e3a8a; /* Bleu foncé pour le mode sombre 
+  border-color: #2563eb;
+}
+
+html[data-theme='dark'] .customtip {
+  background-color: #3b82f6; /* Bleu clair pour le titre en mode sombre 
+}
+Styles pour le mode sombre */
