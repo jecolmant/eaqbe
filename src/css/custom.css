@@ -137,3 +137,17 @@ html[data-theme='dark'] .customtip {
   background-color: #3b82f6; /* Bleu clair pour le titre en mode sombre 
 }
 Styles pour le mode sombre */
+
+.my-tip {
+  /* Styles pour votre tip personnalisé */
+  background-color: #e2e8f0; /* Exemple de couleur de fond bleu clair */
+  border-left: 4px solid #3182ce; /* Exemple de bordure bleue */
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.my-tip-title {
+  /* Styles pour le titre de votre tip personnalisé */
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}

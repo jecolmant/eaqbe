@@ -1,0 +1,17 @@
+.myTip {
+    background-color: #e6f6e6; /* Couleur de fond bleu clair */
+    border-left: 4px solid #009400; /* Bordure bleue */
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .myTipTitle {
+    font-weight: normal; /* Pas de gras */
+    text-transform: none; /* Pas de majuscules */
+    margin-bottom: 0.5rem;
+  }
+  
+  .myTipContent {
+    /* Styles pour le contenu du tip */
+  }
+  

@@ -1,4 +1,128 @@
 ---
 sidebar_position: 3
 ---
-# 1.3. Learning Concepts
+# Notions d'apprentissage
+
+Nous avons vu au chapitre précédent [Techniques Supervisées vs Non Supervisées](/Academy/Data_Sciences/Supervised_&_Unsupervised), que nous parlons d'apprentissage pour les techniques supervisées et non-supervisées.
+
+Toutefois, la littérature se réfère davantage aux techniques supervisées pour évoquer les principes d'apprentissage. Cela a une certaine logique étant donné que dans le cadre de l'application d'une technique supervisée, nous, en tant que data scientist, jouons le rôle de professeur de la machine et dans cette démarche, nous l'entrainnons et nous vérifions si la machine a bien appris et si elle fait correctement son travail. A contrario, les techniques non-supervisées ne sont pas explicitement guidées dans l'apprentissage qui est entièrement autonome à la machine et dont la finalité sera de mettre en avant des tendances ou des relations cachées que nous en tant que data scientist devront interpréter comme étant utile ou non.
+
+D'ailleurs un autre élément fondamental qui distincte un apprentissage supervisé d'un apprentissage non-supervisé est le fait que la machine, dans un apprentissage supervisé, assurera une continuité de cet apprentissage de manière autonome par la suite. Nous avons vu comme exemple que si nous apprenons à une machine que lorsqu'un email contient les mots "gratuit", "lotterie" et "argent", il y a une forte probabilité que ce soit un spam (courrier non désirable), la machine pourrait découvrir par la suite que le mot "bitcoin" est souvent reprit également avec ces mots et donc sans que nous l'ayons explicitement programmée, elle intégrera une nouvelle règle : celle d'identifier le mot "bitcoin" comme ayant une certaine probabilité à être un spam. Dans le cadre d'un apprentissage non-supervisé, à chaque fois que l'on applique l'algorithme sur des nouvelles données, on obtiendra un nouveau modèle, c'est à dire que la machine recommencera son apprentissage à zéro.
+
+## Déroulement d'un apprentissage supervisé
+
+Pour réaliser un modèle de prédiction, nous devons disposer de données qui comprennent les valeurs que l’on souhaite prédire. On parle de données « étiquetées » (labeled data). Nous devons donc disposer de colonnes considérées comme étant des variables explicatives (des prédicteurs, les X  : X<sub>1</sub>, X<sub>2</sub>,X<sub>3</sub>,...) ainsi qu'une variable à expliquer (la variable prédite Y).
+
+### Répartition d'un dataframe en variables explicatives et variable cible
+
+La première étape d'un apprentissage supervisés et donc d'identifier et sélectionner les X et également identifier la colonne Y. Bien entendu, nous partons de l'hypothèse que nous disposons de données "propres", c'est à dire que toutes les étapes d'analyse et de préparation (notamment des transformations) ont été réalisées et les données sont structurées et donc représentées sous forme tabulaire. Nous partons également du postulat que la sélection des prédicteurs - variables explicatives les plus utiles pour créer notre modèle - a déjà été réalisé également.
+
+Nous disposons d'une table contenant des colonnes X et une colonne Y, comme suit :
+
+    | X<sub>1</sub> | X<sub>2</sub> | X<sub>3</sub> | X<sub>...</sub> | X<sub>n</sub> |  Y |
+    |:---------------------:|:----------:|:---------------------:|:---------------------:|:---------------------:|:------------------------:|
+    | X<sub>1,1</sub> | X<sub>1,2</sub> | X<sub>1,3</sub>| ...| X<sub>1,n</sub> | Y<sub>1</sub>|
+    | X<sub>2,1</sub> | X<sub>2,2</sub> | X<sub>2,3</sub>| ...| X<sub>n,n</sub> | Y<sub>2</sub>|
+    | ... | ... | ...| ...| ... | ...|
+    | X<sub>n,1</sub> | X<sub>n,2</sub> | X<sub>n,3</sub>| ...| X<sub>n,n</sub>| Y<sub>3</sub>|
+
+
+import MyCustomTip from '@site/src/components/HomepageFeatures/MyCustomTip';
+
+<MyCustomTip>
+  X<sub>2,3</sub> correspond à la valeur de la 2e ligne de la 3e colonne
+</MyCustomTip>
+
+Pour convertir nos données en X et Y, il suffit simplement de donner l'instruction des colonnes appartenant à X et celle appartenant à Y. L'écriture [['En-tête Colonne 1','En-tête Colonne 2' ]] signifie qu'il y a plusieurs colonnes, alors que [ ] signifie qu'il n'y a qu'une seule colonne.
+
+```python
+import pandas as pd
+
+df = pd.DataFrame(data)
+
+
+X = df[['X1', 'X2', 'X3']]  
+y = df['Y']
+```
+
+### Partitionnement des données
+
+La seconde étape consiste à subdiviser (partitionner) les enregistrements afin d'utiliser une partition pour créer le modèle (apprendre à la machine) et l'autre partition pour valider le modèle (vérifier que l'élève, la machine, a bien appris).
+
+On partitionne donc les enregistrements des colonnes X et Y en deux parties :
+
+<ul>
+  <li>Set d'entrainnement qui comprends les données d'apprentissage</li>
+  <li>Set de validation qui comprends les données qui seront utilisées pour vérifier l'apprentissage</li>
+</ul> 
+
+Le partitionnement des données (aléatoire) dépend fortement de la quantité de données à dispositon et de la complexité de la technique qui sera utilisé. Par exemple, si on dispose d'un nombre de données restreint, le partitionnement sera réalisé comme suit : Set d'entrainnement 60 % ; Set de test 40 %.
+
+Par contre, si on dispose de nombreuse données et que la technique requière un nombre important d'enregistrements (par exemple un réseau de neurones), le partitionnement sera réalisé comme suit : Set d'entrainnement 80 % ; Set de test 20 %.
+
+> :bulb: **Tip:** La répartition des enregistrements entre la partition "entrainnement" et la partition "validation" doit être réalisée de manière aléatoire 
+
+Ce partitionnement peut être réalisé de manière simple à l'aide de la librairie spécialisée en machine learning : sickit-learn :
+
+```python
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+
+X et y reprennent toutes nos données. X contient plusieurs colonnes et de nombreux enregistrements. Y ne contient qu'une colonne et le même nombre d'enregistrements que X. La fonction train_test_split va nous permettre de réaliser ce partionnement et comprends ci-dessus 4 arguments. Le premier identifie les X, le second identifie y, le troisième définit la taille de la partition de test (dans ce cas-ci 20 %) et le quatrième, random_state permet de fixer le graine de générateur de nombre aléatoire à 42, de sorte qu'à chaquefois que nous exécutons la fonction train_test_split avec la même valeur pour random_state, nous obtiendrons exactement la même division de données. 
+
+### Étape d'apprentissage 
+
+Dans la phase d'apprentissage, nous appliquons une technique statistique à nos données d'entrainnement. Par exemple, pour la régression linéaire, technique supervisée paramétrique, l'algorithme va réaliser un processus comprenant différentes étapes permettant de définir les paramètres, c'est à dire les incidences des valeurs de X sur la valeur Y. Par exemple : l'incidence de la superficie en m² d'une maison sur sa valeur.
+
+L'algorithme - qui consiste en une série d'étapes (y compris l'étape de partitionnement des données) - , va nous fournir un modèle que nous allons pouvoir appliquer à de nouvelles données.
+
+Voici un exemple d'apprentissage en appliquant un model de régression linéaire prédéfini (Nous décomposerons ce modèle dans le chapitre sur la régression linéaire).
+
+```python
+model = LinearRegression()
+model.fit(X_train, y_train)
+```
+
+### Étape de validation
+
+Dès que nous obtenons un modèle, nous allons le vérifier, c'est à dire le valider. La manière la plus simple de réaliser une première validation est de vérifier si le modèle fonctionne correctement en lui appliquant les données sur base desquelles il a réalisé son apprentissage, mais cette fois-ci, on va lui cacher les valeurs des y et lui demander de les prédire. étant donné que nous utilisons les mêmes données que celle utilisées lors de l'apprentissage, nous nous attendons à obtenir à cette étape-ci, un excellent score en vérifiant les valeurs prédites par rapport aux valeurs réelles. L'idée est de s'assurer que ce modèle est robuste dans son apprentissage.
+
+```python
+y_pred = model.predict(X_train)
+```
+
+Nous utilisons la fonction de prédiction de notre modèle sur les mêmes valeurs de X à partir desquelles notre modèle a été créé.
+
+Les erreurs de prédiction dans le set d’entrainement (validation) nous donnent une indication sur l’ajustement du modèle (sous-entraîné ou surentrainé). 
+
+
+:::warning
+L'erreur dans l'étape de validation, c'es à dire la différence entre les valeurs prédites et valeurs réelles doit être minimale mais ne doit absolument pas correspondre à 0. Si vous obtenez 0, c'est que votre modèle est en sur-apprentissage. Il connait trop bien ses données d'entrainnement et ne sera probablement pas généralisable et donc donnera un score médiocre sur de nouvelles données (par exemple lors de l'étape de test)
+:::
+
+
+
+### Étape de test
+
+Si l'étape de validation est concluante, c'est à dire que nous obtenons une fiabilité élevée (faible différence entre les valeurs prédites par le modèle et les valeurs réelles connues), nous passons à la phase de test. Attention, si l'étape de validation mène à une fiabilité faible, cela signifie que le modèle est sous-entrainné. Il n'est pas capable de prédire correctement des valeurs sur lesquelles il a été entrainné ! Il ne dispose pas de suffisamment d'enregistrements ou de colonnes et d'enregistrements. 
+
+L'étape de test consiste à appliquer notre modèle sur la seconde partition de nos données, celles à partir desquelles notre modèle n'a pas été entrainné mais dont nous connaissons les valeurs des X et les valeurs des Y. Nous appliquons la fonction de prédiction sur les X et nous comparons les valeurs obtenues.
+
+
+
+```python
+y_pred = model.predict(X_test)
+```
+Nous vérifions ensuite la différence entre les valeurs prédites et les valeurs réelles.
+
+Le résultat de l'étape de test devrait être légèrement inférieur à l'étape de validation signifiant que notre modèle est capable de définir une règle généralisable. Sur base des données d'entrainnement il a été capable de généraliser la règle à n'importe quelle données.
+
+
+## Évaluation d'un apprentissage supervisé
+
+### Évaluation d'une technique d'estimation
+
+### Évaluation d'une technique de classement
+
+### Règle généralisable
