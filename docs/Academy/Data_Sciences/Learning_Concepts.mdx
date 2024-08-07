@@ -129,9 +129,16 @@ Un erreur est en réalité la différence entre la valeur réelle de Y et connue
 
 e = y-ŷ  On notera e<sub>i</sub> = (𝑦<sub>i</sub> − ŷ <sub>i</sub> ) pour l'erreur d'un enregistrement spécifique et la littérature privilégie l'utilisation de l'erreur quadratique moyenne (root mean square error) qui donne plus de poids aux erreurs importantes et se note 
 
-```python
-r"\[\sqrt{\frac{1}{n}\sum_{i=1}^{n}e_{i}^{2}}\]"
-```
+The quadratic formula is: 
+
+Here's an inline equation: $e_i = (y_i - \hat{y}_i)$
+
+And a block equation:
+
+$$
+MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+$$
+
 ### Évaluation d'un modèle d'estimation
 
 ### Évaluation d'un modèle de classement
