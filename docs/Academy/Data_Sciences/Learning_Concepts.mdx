@@ -121,8 +121,19 @@ Le résultat de l'étape de test devrait être légèrement inférieur à l'éta
 
 ## Évaluation d'un apprentissage supervisé
 
-### Évaluation d'une technique d'estimation
+Comment nous l'avions mentionné précédemment, nous serons confronté à la nécessité d'évaluer plusieurs techniques par exemple pour une estimation, une régression, un arbre de régréssion ou les K-Nearest Neighbors ainsi que différentes configuration des modèles. Par exemple, pour une régression, il s'agirait d'évaluer un modèle linéaire et un modèle polynomial afin d'identifier lequel est le plus performant. 
 
-### Évaluation d'une technique de classement
+Les erreurs de prédiction dans le set d’entrainement (validation) nous donnent une indication sur l’ajustement du modèle (sous-entraîné ou surentrainé). Par exemple, si l’erreur d’entrainement est de 0, mon modèle est certainement en sur-apprentissage.Les erreurs de prédiction dans le set de test (erreurs prédictives) mesurent la capacité de prédiction du modèle.Les erreurs dans le set validation doivent être inférieures aux erreurs dans le set de validation étant donné que le modèle a été entrainé sur base du set d’entrainement (et donc du set de validation). 
+
+Un erreur est en réalité la différence entre la valeur réelle de Y et connue et la valeur prédite par le modèle que l'on nomme ŷ
+
+e = y-ŷ  On notera e<sub>i</sub> = (𝑦<sub>i</sub> − ŷ <sub>i</sub> ) pour l'erreur d'un enregistrement spécifique et la littérature privilégie l'utilisation de l'erreur quadratique moyenne (root mean square error) qui donne plus de poids aux erreurs importantes et se note 
+
+```python
+r"\[\sqrt{\frac{1}{n}\sum_{i=1}^{n}e_{i}^{2}}\]"
+```
+### Évaluation d'un modèle d'estimation
+
+### Évaluation d'un modèle de classement
 
 ### Règle généralisable
