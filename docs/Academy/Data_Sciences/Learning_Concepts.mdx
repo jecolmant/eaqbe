@@ -19,6 +19,8 @@ La première étape d'un apprentissage supervisés et donc d'identifier et séle
 
 Nous disposons d'une table contenant des colonnes X et une colonne Y, comme suit :
 
+<div class="center-table">
+
     | X<sub>1</sub> | X<sub>2</sub> | X<sub>3</sub> | X<sub>...</sub> | X<sub>n</sub> |  Y |
     |:---------------------:|:----------:|:---------------------:|:---------------------:|:---------------------:|:------------------------:|
     | X<sub>1,1</sub> | X<sub>1,2</sub> | X<sub>1,3</sub>| ...| X<sub>1,n</sub> | Y<sub>1</sub>|
@@ -26,6 +28,7 @@ Nous disposons d'une table contenant des colonnes X et une colonne Y, comme suit
     | ... | ... | ...| ...| ... | ...|
     | X<sub>n,1</sub> | X<sub>n,2</sub> | X<sub>n,3</sub>| ...| X<sub>n,n</sub>| Y<sub>3</sub>|
 
+</div>
 
 import MyCustomTip from '@site/src/components/HomepageFeatures/MyCustomTip';
 
@@ -121,26 +124,76 @@ Le résultat de l'étape de test devrait être légèrement inférieur à l'éta
 
 ## Évaluation d'un apprentissage supervisé
 
-Comment nous l'avions mentionné précédemment, nous serons confronté à la nécessité d'évaluer plusieurs techniques par exemple pour une estimation, une régression, un arbre de régréssion ou les K-Nearest Neighbors ainsi que différentes configuration des modèles. Par exemple, pour une régression, il s'agirait d'évaluer un modèle linéaire et un modèle polynomial afin d'identifier lequel est le plus performant. 
+Nous serons confronté à la nécessité d'utilisé et évaluer plusieurs techniques afin de pouvoir identifier celle qui nous permettra d'obtenir le modèle le plus efficient au regard de nos données. Selon la technique, nous seront également amené à évaluer différentes configurations pouvant mener à un meilleur ou moins bon apprentissage.
 
-Les erreurs de prédiction dans le set d’entrainement (validation) nous donnent une indication sur l’ajustement du modèle (sous-entraîné ou surentrainé). Par exemple, si l’erreur d’entrainement est de 0, mon modèle est certainement en sur-apprentissage.Les erreurs de prédiction dans le set de test (erreurs prédictives) mesurent la capacité de prédiction du modèle.Les erreurs dans le set validation doivent être inférieures aux erreurs dans le set de validation étant donné que le modèle a été entrainé sur base du set d’entrainement (et donc du set de validation). 
+### Règle généralisable
 
-Un erreur est en réalité la différence entre la valeur réelle de Y et connue et la valeur prédite par le modèle que l'on nomme ŷ
+ Les erreurs de prédiction dans le set d’entrainement (validation) nous donnent une indication sur l’ajustement du modèle (sous-entraîné ou surentrainé). Par exemple, si l’erreur d’entrainement est de 0, mon modèle est certainement en sur-apprentissage, il est en effet impossible d'obtenir un modèle parfait. Les erreurs de prédiction dans le set de validation devraient toutefois être minimisées étant donné que notre modèle a été entrainné sur base des ces données. Si le set de validation présente un taux d'erreur plus important, il est fort probable que nous soyons en sous-apprentissage. Enfin, les erreurs de prédiction dans le set de test (erreurs prédictives) mesurent la capacité de prédiction du modèle et devraient être légèrement plus importante que dans le set de validation, sans pour autant s'en écarté de manière trop importante afin de démontrer la capacité du modèle à avoir créé une règle généralisable.
 
-e = y-ŷ  On notera e<sub>i</sub> = (𝑦<sub>i</sub> − ŷ <sub>i</sub> ) pour l'erreur d'un enregistrement spécifique et la littérature privilégie l'utilisation de l'erreur quadratique moyenne (root mean square error) qui donne plus de poids aux erreurs importantes et se note 
 
-The quadratic formula is: 
+### Sous-apprentissage
+<div class="todo">Ajouter un graphique ici
+Graphique à ajouter
+Classement & estimation : https://images.app.goo.gl/JEnhJEv2YswHWfEL9
+Le sous-apprentissage apparait lorsque Lorsque l’échantillon d’apprentissage ne couvre pas suffisamment de cas différents ou les variables sont insuffisantes en termes de quantité, le modèle peut avoir du mal à généraliser correctement.
+En sous-apprentissage absolu, nous obtiendrons un mauvais résultat lors de l'application de l'étape de validation. Toutefois nous pourrions également rencontrer le cas où l'étape d'apprentissage obtiendrait un score qui parraitrait "bon" mais où l'application du modèle aux données de test renverrait un mauvais score.</div>
 
-Here's an inline equation: $e_i = (y_i - \hat{y}_i)$
 
-And a block equation:
+
+### Sur-apprentissage
+<div class="todo">Ajouter un graphique ici
+Graphique à ajouter
+Classement & estimation : https://images.app.goo.gl/JEnhJEv2YswHWfEL9
+Le sur-apprentissage apparait surtout lorsque l’échantillon est trop important. Pour ajuster son modèle, il faut donc soit diminuer la taille de l’échantillon, soit le augmenter le nombre de variables explicatives. En sur-apprentissage absolu, nous obtenons un excellent résultat lors de l'application de l'étape de  mais un mauvais score lors de l'application du modèle aux données de test renverrait un mauvais score.</div>
+
+
+### Évaluation d'un modèle d'estimation
+
+Dans le cadre d'une estimation, les erreurs de prédiction dans le set d’entrainement (validation) nous donnent une indication sur l’ajustement du modèle (sous-entraîné ou surentrainé). Par exemple, si l’erreur d’entrainement est de 0, mon modèle est certainement en sur-apprentissage..Les erreurs dans le set validation doivent être inférieures aux erreurs dans le set de validation étant donné que le modèle a été entrainé sur base du set d’entrainement (et donc du set de validation). 
+
+**Une erreur $$(e)$$** est en réalité la différence entre la valeur réelle de $$y$$ et connue et la valeur prédite par le modèle que l'on nomme $\hat{y}$
+
+$$e = y-ŷ$$  On notera $$e_i = (𝑦_i − ŷ_i )$$ pour l'erreur d'un enregistrement spécifique.
+
+:::warning
+Il est important de considérer qu'il existe différents indicateurs d'évaluation et spécifiques selon la technique statistique utilisée. 
+:::
+
+L'évaluation dans tous les cas, la littérature privilégie l'utilisation de **l'erreur quadratique moyenne (root mean square error)**  :
+<br /> 
 
 $$
 MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
 $$
+<br /> 
+Cette formule pourrait également être inscrite comme suit :
+<br /> 
 
-### Évaluation d'un modèle d'estimation
+$$
+MSE = \frac{1}{n} \sum_{i=1}^{n} (ei)^2
+$$
+<br /> 
+où $e_i = y_i - \hat{y}_i$ (l'erreur de chaque enregistrement) et $n =$ le nombre total d'enregistrements
+<br /> 
+L'erreur quadratique moyenne (RMSE) est exprimée dans les mêmes unités que la variable cible. Si l'on essaie de prédire le prix d'une maison et que l'on obtient un RMSE de 75.000 € et que l'échelle $min/max$ des prix des maisons de votre modèle est de $350.000 € - 500.000 €$, il va de soi que le RMSE obtenu n'est pas optimal. Par contre si ces mêmes valeurs des maisons de votre modèle sont de $1.950.000 € - 2.550.000 €, un RMSE de 75.000 € est considéré comme faible et donc un bon modèle. L'évaluation du RMSE doit tenir compte de l'échelle des données. 
+
+Toutefois, il est important de souligner qu'un des principes de base d'un modèle d'apprentissage est de normaliser ou standardiser les données afin de mettre les données sur une échelle commune et rendre le modèle plus efficient. Par exemple, si nous souhaitons créer un modèle sur l'ensemble de nos données comprenant tant des ventes d'appartements, de maisons que de villa haut de gamme, notre modèle contiendra de nombreux enregistrements améliorant la diversité et donc favorisant une règle généralisable. Dans ce cas, nous souhaitons obtenur une valeur du RMSE proche de 0 indiquant un très bon ajustement. Attention toutefois à considérer qu'un RMSE correspondant à 0 dans la phase de validation (application du modèle sur les mêmes données que celles à partir desquelles il a été entrainné), est signe d'un surapprentissage. Ce surapprentissage sera confirmé si en phase de test, le RMSE obtenu est très élevé. Nous souhaitons en effet obtenir un RMSE faible (très faible) en validation et en test un RMSE moins performant que la validation mais sans pour autant creuser un écart trop important.
 
 ### Évaluation d'un modèle de classement
 
-### Règle généralisable
+Dans le cadre d'un classement, notre modèle attribuera une classe à la valeur prédite. Prenons le cas d'un modèle de classement à deux classes (exemple contagieux / non contagieux). $\hat{y}$ aura donc comme valeur finale possible 1 ou 0. Bien entendu, nous n'obtiendrons pas un modèle parfait. Par conséquent, pour certaines valeurs de $y = 1$, notre $\hat{y}$ correspondra parfois à $1$ et parfois à $0$.
+
+Si nous avons plus de deux classes, par exemple Bon, moyen ou mauvais, $\hat{y}$ aura  comme valeurs finales possibles 1, 2 ou 3 et pour certaines valeurs de $y = 1$, notre $\hat{y}$ correspondra parfois à $1$, parfois à $2$ et parfois à $3$.
+
+Pour évaluer un modèle de classement, nous créons une matrice - la matrice de confusion - dans laquelle on résume les classements corrects et incorrects. Cette matrice nous permettra de calculer **le taux de précision** et/ou le **taux d'erreur global**.
+
+Prenons l'exemple d'un modèle dont l'objectif est de prédire pour $\hat{y}$ soit une valeur 1 soit une valeur 0. Dans ce cas, la matrice contiendra 4 cases comme suit :
+
+<div class="center-table">
+
+|        | Y = 0     | Y = 1    |
+|:-----:|:---------:|:--------:|
+| ŷ = 0 |   <span class="text-green">55</span>  | <span class="text-red">3</span>     |
+| ŷ = 1|    <span class="text-red">9</span>    | <span class="text-green">33</span>  |
+
+</div>
