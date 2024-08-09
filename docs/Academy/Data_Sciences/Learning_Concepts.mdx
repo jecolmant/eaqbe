@@ -19,7 +19,7 @@ La première étape d'un apprentissage supervisés et donc d'identifier et séle
 
 Nous disposons d'une table contenant des colonnes X et une colonne Y, comme suit :
 
-<div class="center-table">
+
 
     | X<sub>1</sub> | X<sub>2</sub> | X<sub>3</sub> | X<sub>...</sub> | X<sub>n</sub> |  Y |
     |:---------------------:|:----------:|:---------------------:|:---------------------:|:---------------------:|:------------------------:|
@@ -28,7 +28,7 @@ Nous disposons d'une table contenant des colonnes X et une colonne Y, comme suit
     | ... | ... | ...| ...| ... | ...|
     | X<sub>n,1</sub> | X<sub>n,2</sub> | X<sub>n,3</sub>| ...| X<sub>n,n</sub>| Y<sub>3</sub>|
 
-</div>
+
 
 import MyCustomTip from '@site/src/components/HomepageFeatures/MyCustomTip';
 
@@ -165,6 +165,7 @@ L'évaluation dans tous les cas, la littérature privilégie l'utilisation de **
 $$
 MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
 $$
+
 <br /> 
 Cette formule pourrait également être inscrite comme suit :
 <br /> 
@@ -181,19 +182,59 @@ Toutefois, il est important de souligner qu'un des principes de base d'un modèl
 
 ### Évaluation d'un modèle de classement
 
-Dans le cadre d'un classement, notre modèle attribuera une classe à la valeur prédite. Prenons le cas d'un modèle de classement à deux classes (exemple contagieux / non contagieux). $\hat{y}$ aura donc comme valeur finale possible 1 ou 0. Bien entendu, nous n'obtiendrons pas un modèle parfait. Par conséquent, pour certaines valeurs de $y = 1$, notre $\hat{y}$ correspondra parfois à $1$ et parfois à $0$.
+Dans le cadre d'un classement, notre modèle attribuera une classe à la valeur prédite. Prenons le cas d'un modèle de classement à deux classes (exemple contagieux (1) / non contagieux (0)). $\hat{y}$ aura donc comme valeur finale possible 1 ou 0. Bien entendu, nous n'obtiendrons pas un modèle parfait. Par conséquent, pour certaines valeurs de $y = 1$, notre $\hat{y}$ correspondra parfois à $1$ et parfois à $0$.
 
 Si nous avons plus de deux classes, par exemple Bon, moyen ou mauvais, $\hat{y}$ aura  comme valeurs finales possibles 1, 2 ou 3 et pour certaines valeurs de $y = 1$, notre $\hat{y}$ correspondra parfois à $1$, parfois à $2$ et parfois à $3$.
 
-Pour évaluer un modèle de classement, nous créons une matrice - la matrice de confusion - dans laquelle on résume les classements corrects et incorrects. Cette matrice nous permettra de calculer **le taux de précision** et/ou le **taux d'erreur global**.
+Pour évaluer un modèle de classement, nous créons une matrice - la matrice de confusion - dans laquelle nous résumons les classements corrects et incorrects. Cette matrice nous permettra de calculer **le taux de précision** et/ou le **taux d'erreur global**.
 
 Prenons l'exemple d'un modèle dont l'objectif est de prédire pour $\hat{y}$ soit une valeur 1 soit une valeur 0. Dans ce cas, la matrice contiendra 4 cases comme suit :
-
-<div class="center-table">
+<br /> 
 
 |        | Y = 0     | Y = 1    |
 |:-----:|:---------:|:--------:|
 | ŷ = 0 |   <span class="text-green">55</span>  | <span class="text-red">3</span>     |
 | ŷ = 1|    <span class="text-red">9</span>    | <span class="text-green">33</span>  |
 
-</div>
+
+
+
+Pour calculer le **taux de précision**, il suffit d'additionner les valeurs évaluées correctement que nous divisons par le total de valeur.
+
+$$
+\text{Taux de précision} = \frac{\color{green}{55} + \color{green}{33}}{\color{green}{55} + \color{red}{3} + \color{red}{9} + \color{green}{33}} = \text{88 pourcent}
+$$
+<br /> 
+Pour calculer l' **erreur globale**, il suffit de soustraire le taux de précision de 1 = 22 pourcent
+<br /> 
+$$
+\text{Taux d'erreur globale} = 1 -\text{Taux de précision}
+$$
+<br /> 
+Ce qui nous intéresse, ce sont les prédictions correctemment réalisées, à savoir, les vrais négatifs (les non-contagieux qui sont correctements prédits comme non-contagieux) et les vrais positifs (les contagieux qui sont prédits comme contagieux) contrairement aux faux positifs (les non-contagieux qui sont prédits comme étant contagieux) et les faux négatifs (les contagieux qui sont prédits comme non-contagieux). Le matrice se présente de la manière suivante :
+<br /> 
+
+|        | Y = 0 Non-Contagieux     | Y = 1  Contagieux  |
+|:-----:|:---------:|:--------:|
+| ŷ = 0 |   <span class="text-green">Vrais négatifs</span>  | <span class="text-red">Faux négatifs</span>     |
+| ŷ = 1|    <span class="text-red">Faux positifs</span>    | <span class="text-green">Vrais négatifs</span>  |
+
+
+<br /> 
+Dans notre cas, nous avant définit un seuil à $0.5$, à savoir qu'un résultat $>=0.5$ est considéré comme contagieux et un résultat $<0.5$ est considéré comme non contagieux. Il est évidemment plus prudent d'avoir un modèle qui prédit davantage de personne comme étant contagieuses alors qu'elles ne le sont pas plutôt qu'un modèle qui prédit davantage les personnes contagieuses comme étant non-contagieuses. Nous sommes libre évidemment par prudence de réhausser le seuil par exemple à $0.65$.
+
+Si l'objectif de notre modèle est de prédire plus de deux classes, par exemple : "Bon","Moyen","Mauvais'; dans ce cas, nous ajoutons à notre matrice $n$ colonnes supplémentaires, $n$ étant le nombre de classes à prédire.
+
+
+<br /> 
+
+
+|        | Y = 1 (Bon)  | Y = 2 (Moyen)    | Y = 3 (Mauvais)|
+|:-----:|:---------:|:--------:|:--------:|
+| ŷ = 1 (Bon) |   <span class="text-green">Vrais positifs "Bon"</span>  | <span class="text-red">Faux positifs "Bon" <br /> & Faux négatifs "Moyen"</span>     | <span class="text-red">Faux positifs "Bon" <br /> & Faux négatifs "Mauvais"</span>  |
+| ŷ = 2 (Moyen)|    <span class="text-red">Faux positifs "Moyen" <br /> & Faux négatifs "Bon"</span>    | <span class="text-green">Vrais positifs "Moyen" </span>  |<span class="text-red">Faux positifs "Moyen" <br /> & Faux négatifs "Mauvais"</span>  |
+| ŷ = 3 (Mauvais)|   <span class="text-red">Faux positifs "Mauvais" <br /> & Faux négatifs "Bon"</span>    | <span class="text-red">Faux positifs "Mauvais" <br /> & Faux négatifs "Moyen"</span>   |<span class="text-green">Vrais positifs "Mauvais" </span> |
+
+<br /> 
+
+De nouveau, pour calculer le taux de précision, il suffit d'additionner toutes les valeurs correctes et de les diviser par le total d'enregistrements.

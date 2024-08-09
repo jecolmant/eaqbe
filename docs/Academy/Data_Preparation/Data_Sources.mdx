@@ -2,3 +2,50 @@
 sidebar_position: 2
 ---
 # Data Sources
+
+Tout projet data fait appel à des sources de données. Une source de données désigne le lieu de stockage, qu'il soit matériel ou virtuel, où l'information se présente sous une multitude de formats. En tant que Data scientist, notre objectif est de pouvoir accéder à ces données et les exploiter.
+
+## Application informatique
+Il est de plus en plus fréquent de réaliser un projet data sur plusieurs sources de données. Il est important de noter qu'une source de données est à l'origine générée par un programme informatique de quelque nature qu'il soit et qui stocke ces informations sous diverses formes. Dans le cadre de données type "business", il s'agira principalement d'une ou plusieurs applications informatiques - un programme créé et utilisé pour réaliser de manière numérique des tâches dans un domaine spécifique -. Par exemple, un programme permettant de gérer les horaires des employés ou un programme permettant de réaliser la comptabilité.
+
+## Progiciel de gestion intégré
+L'obtention de programmes spécifiques à des domaines et fonctionnant en sillo représente un certain challenge pour l'exploitation de ces données et principalement sur le fait de pouvoir les croiser/liées pour des besoins d'analyses. De plus en plus d'entreprise se sont tournées vers des solutions de type ERP - enterprise ressource planning - qui sont également des programmes mais qui intégrent une suite d'applications dont l'architecture de données a été pensée pour fonctionner de manière commune. Par exemple l'ERP xyz permet de gérer les horaires des employés, les fiches de paie, la comptabilité, les achats etc.
+
+## API (interface de programmation d'application)
+De nos jours, toutes actions entreprise par un utilisateur sur un ordinateur, une plateforme web - de quelque nature qu'elle soit - va automatiquement générer des données qui seront stockées à des fins d'exploitation. Une information peut circuler d'un système à un autre soit par des protocoles réseaux (FTP ou HTTP) soit - ce que l'on retrouve principalement -, des API.
+
+Un API - application programm interface - est une solution qui permet d'accéder aux fonctions ou aux données d'une application à distance. Grâce à une API, il est possible de créer une communication avec un logiciel cible afin soit d'utiliser des fonctionnalités, soit d'en récupérer des données. Une requête, exprimée dans un langage commun, est envoyée au logiciel cible qui la traite et renvoie le résultat attendu si les conditions d'accès sont respectées.
+
+
+
+<div className="indentp">
+<em>L'analogie suivante permet de mieux comprendre le fonctionnement d'un API. Prenons le cas d'un restaurant. Vous avez le client - la personne qui souhaite recevoir quelque chose (en l'occurence un repas), le chef cuisinier qui dispose de tous les ingrédients pour pouvoir faire toutes les recettes de sa carte (et bien plus !), et enfin le serveur qui va servir d'intermédiaire entre le client et le chef cuisinier. Le client arrive au restaurant et le serveur lui tends la carte. La carte reprends uniquement ce que le client a droit (peut être que ce restaurant fait aussi des gâteaux au chocolat mais ce n'est pas mis à disposition des clients). Le serveur a donné la carte au client, car le client s'est bien authentifié en tant que tel et disposait des accès au restaurant (exemple tenue de ville exigée). Le client exprime clairement dans sa commande ce qu'il souhaite - une lasagne aux légumes - et le serveur va de ce pas demander au chef cuisinier de préparer le plat, car le client y a droit. Le client n'a aucune idée de la manière dont les choses se déroulent en cuisine, ni-même comment la lasagne est préparée mai cela ne l'importe peu, tant qu'il obtient ce qu'il souhaite et dont il a droit. Le serveur revient après quelques instants avec le plat. Le client dispose du plat et peut maintenant en faire ce qu'il en veut !</em>
+</div><br />
+
+L'API permet de récupérer des données ou fonctionnalités d'un système A pour pouvoir les réutilser dans un système B, et l'avantage est bien entendu le fait que cete récupération ne nécessite pas l'interrogation d'une base de données entière mais uniquement l'extraction ou l'utilisation d'un élément précis
+
+## Base de données relationnelle
+
+Une base de données relationnelle organise les informations dans des tables liées entre elles par des clés, chaque table étant structurée en lignes et colonnes. Elle utilise le langage SQL (Structured Query Language) pour interroger et manipuler ces données. Une base de données dite SQL permet une gestion efficace de l'information et est un choix privilégié pour de nombreuses applications. Bien que l'information dans une base de données relationnelle soit le type de source le plus adapté pour l'exploitation des données en informatique décisionnelle (réalisation de data visualization), un travail de remodélisation est toutefois nécessaire pour rendre l'interraction avec les visuels le plus efficient possible.
+
+## Base de données non-relationnelle
+
+Une base de données non relationnelle est une base de données qui n’utilise pas le schéma tabulaire sous forme de lignes et de colonnes présent dans la plupart des systèmes de base de données plus traditionnels. Dans un contexte de quantité croissante de données, la base de données relationnelle n’est pas assez efficace. A contrario, la base de données non relationnelle permet de stocker des données volumineuses. Celles-ci peuvent être regroupées sur plusieurs machines afin de réduire les coûts de maintenance.Finalement, la différence qui existe entre une base de données relationnelle et une base de données non relationnelle est la façon de stocker. L’une stocke les données dans des tables tandis que l’autre les stockent au format clé-valeur de manière à stocker davantage en termes de quantité. Si le NoSQL répond à la problématique actuelle du Big Data, il ne replace pas pour autant la base de données relationnel mais plutôt la complète.
+
+## Data Warehouse
+
+Un data warehouse est un système centralisé qui intègre et stocke des données structurées provenant de diverses sources opérationnelles et externes. Ces données, historiques et actuelles, sont régulièrement mises à jour et sont accessibles en lecture seule pour l'analyse et la prise de décision.  Il s'agit d'une sorte de bibliothèque centralisée de données pour l'entreprise qui rassemble des informations provenant de différents systèmes hétérogène et par l'application du concept d'ETL (extract - transform and load), tente d'homogénéiser au mieux les informations afin de permettre une exploitable ultérieure dans des modèles d'analyse. Le data warehouse est organisé en plusieurs couches.
+
+## Data Mart 
+
+Un data mart estsous-ensemble d’un data warehouse qui organise les données selon des usages métiers ou des domaines ciblés. Il s'agit donc d'une vue limitée à certaine information qui ont été remodélisée selon le principe du star-schéma afin de rendre efficient toute exploitation de ces données par des systèmes d'analyse.
+
+## Data Lake
+
+Un data lake est un vaste réservoir de données brutes, stockées dans leur format d'origine, sans modélisation préalable permettant de faire face au concept du BIG Data : les données sont variées (structurées, non structurées, semi-strucurées et proviennnet de plusieurs sources de manière simultanée), le volume et la vitesse de génération de l'information sont tellement importants qu'une base de données tranditionnelle ne pourrait répondre aux requêtes. Pour pouvoir stocker ces données de manière extrêmement rapide, les informations sont enregistrées sous-forme de clés valeurs et peuvent être reconstituées par la suite dans d'autres systèmes.
+
+## Système d'information
+
+Le système d'information d'une organisation correspond au macro et micro environnement "data" d'une entreprise, soit toutes les ressources matérielles, logicielles et humaines, qui permettent de collecter, gérer, stocker et partager l'information au sein même de l' organisation, mais également avec son environnement externe. C'est un écosystème organisé de technologies, de processus et de personnes, qui permet de gérer l'information de manière efficace et sécurisée, de sa collecte à sa diffusion, au service des objectifs de l'organisation et de ses interactions avec le monde extérieur.
+
+

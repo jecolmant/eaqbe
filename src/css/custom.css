@@ -112,20 +112,26 @@ p {
 }
 
 /* Styles pour la classe "custom-admonition" */
-.customtip {
-  background-color: #d4d1d1; /* Couleur de fond bleu clair */
-  border-color: #000000;    /* Couleur de bordure bleu clair */
-  padding: 15px;            /* Espacement intérieur */
-  margin-bottom: 20px;      /* Marge inférieure */
+.custom-tip {
+  /* Styles pour votre tip personnalisé */
+  background-color: #dff6dd; /* Couleur de fond du Tip */
+  border-left: 4px solid #37a165; /* Couleur de la bordure du Tip */
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
-/* Styles pour le titre de l'admonition */
-.customtip-title {
-  background-color: #999da1; /* Couleur de fond légèrement plus foncée pour le titre */
-  padding: 10px;             /* Espacement intérieur du titre */
-  margin-bottom: 10px;       /* Marge inférieure du titre */
-  font-weight: bold;        /* Titre en gras */
+.custom-tip-title {
+  /* Styles pour le titre de votre tip personnalisé */
+  font-weight: normal;  /* Pas de gras */
+  text-transform: none;  /* Pas de majuscules */
+  margin-bottom: 0.5rem;
+  color: #166534;        /* Couleur du texte du titre du Tip */
 }
+
+.custom-tip-content {
+  color: #166534; /* Couleur du texte du contenu du Tip */
+}
+
 
 /* 
 html[data-theme='dark'] .customtip {
@@ -181,7 +187,7 @@ code[class*="language-python"] {
   color: red;
 }
 .center-table {
-  margin-left: 20%;
-  margin-right: 50%;
-  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 65%;
 }
