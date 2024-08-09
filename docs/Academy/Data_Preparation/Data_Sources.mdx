@@ -19,14 +19,77 @@ Un API - application programm interface - est une solution qui permet d'accéder
 
 
 <div className="indentp">
-<em>L'analogie suivante permet de mieux comprendre le fonctionnement d'un API. Prenons le cas d'un restaurant. Vous avez le client - la personne qui souhaite recevoir quelque chose (en l'occurence un repas), le chef cuisinier qui dispose de tous les ingrédients pour pouvoir faire toutes les recettes de sa carte (et bien plus !), et enfin le serveur qui va servir d'intermédiaire entre le client et le chef cuisinier. Le client arrive au restaurant et le serveur lui tends la carte. La carte reprends uniquement ce que le client a droit (peut être que ce restaurant fait aussi des gâteaux au chocolat mais ce n'est pas mis à disposition des clients). Le serveur a donné la carte au client, car le client s'est bien authentifié en tant que tel et disposait des accès au restaurant (exemple tenue de ville exigée). Le client exprime clairement dans sa commande ce qu'il souhaite - une lasagne aux légumes - et le serveur va de ce pas demander au chef cuisinier de préparer le plat, car le client y a droit. Le client n'a aucune idée de la manière dont les choses se déroulent en cuisine, ni-même comment la lasagne est préparée mai cela ne l'importe peu, tant qu'il obtient ce qu'il souhaite et dont il a droit. Le serveur revient après quelques instants avec le plat. Le client dispose du plat et peut maintenant en faire ce qu'il en veut !</em>
+<em>L'analogie suivante permet de mieux comprendre le fonctionnement d'un API. Prenons le cas d'un restaurant. Vous avez le client - la personne qui souhaite recevoir quelque chose (en l'occurence un repas), le chef cuisinier qui dispose de tous les ingrédients pour pouvoir faire toutes les recettes de sa carte (et bien plus !), et enfin le serveur qui va servir d'intermédiaire entre le client et le chef cuisinier. Le client arrive au restaurant et le serveur lui tends la carte. La carte reprends uniquement ce que le client a droit (peut être que ce restaurant fait aussi des gâteaux au chocolat mais ce n'est pas mis à disposition des clients). Le serveur a donné la carte au client, car le client s'est bien authentifié en tant que tel et disposait des accès au restaurant (exemple tenue de ville exigée). Le client exprime clairement dans sa commande ce qu'il souhaite - une lasagne aux légumes - et le serveur va de ce pas demander au chef cuisinier de préparer le plat, car le client y a droit. Le client n'a aucune idée de la manière dont les choses se déroulent en cuisine, ni-même comment la lasagne est préparée mai cela ne l'importe peu, tant qu'il obtient ce qu'il souhaite et dont il a droit. Le serveur revient après quelques instants avec le plat qu'il transmet au client. Le client dispose du plat et peut maintenant en faire ce qu'il en veut !</em>
 </div><br />
 
-L'API permet de récupérer des données ou fonctionnalités d'un système A pour pouvoir les réutilser dans un système B, et l'avantage est bien entendu le fait que cete récupération ne nécessite pas l'interrogation d'une base de données entière mais uniquement l'extraction ou l'utilisation d'un élément précis
+L'API rend les données accessibles et définit comment les applications peuvent les échanger. Elle permet donc de récupérer des données d'un système A pour pouvoir les réutilser dans un système B, et l'avantage est bien entendu le fait que cete récupération ne nécessite pas l'interrogation d'une base de données entière mais uniquement l'extraction ou l'utilisation d'un élément précis.
+
+Pour obtenir de l'information via une API, nous devons dans un premier temps réaliser une requête structurée dans laquelle nous spécifions les crtières de recherche et les options de formatage (comment les données doivent être présentées).
+
+La requête structurée pourrait être considérée comme une lettre que nous envoyons et dans laquelle nous expliquons ce que nous souhaitons.
+
+Exemple d'une requête structurées  (simplifiée - selon l'API certains paramètres additionnels doivent être établis):
+
+    ```python
+    {
+    "start": 0,                           # Démarrer à partir du 1er résultat (enregistrement O = 1)
+    "results": 100,                       # Nombre maximum de résultats à renvoyer
+    "outputTimeZone": "UTC",              # Fuseau horaire pour les dates dans la réponse
+
+    "filter": {                           # Critères de filtrage pour les données
+        "range": {
+        "Date": { 
+            "from": "08/08/2024",           
+            "to": "14/08/2024",    
+            "dateFormat": "dd/MM/yyyy" 
+        }   
+        } 
+    },
+
+    "logsources": [                       # Sources de données à interroger
+        { 
+        "name": "Orders",  
+        "type": "table"       
+        }  
+    ],
+
+    "query": "*",                        # Quelles sont les données à extraire (* = toutes)
+    "highlight": true,  
+    "sortKey": [ "Date" ]               # Tri de la table sur base de date, par ordre croissant
+    }
+    
+
+
+```
+
+Ensuite, nous devons rédiger l'adresse à laquelle nous souhaitons envoyer notre lettre ainsi que notre droit d'accès aux données demandées.
+
+
+```python
+https://eaqbe_server:9987/Unity/Search?searchMode=async&ABCDToken=692C0C77FBE1E21DB05B3AAD60E93293
+```
+
+L'emplacement de l'API se trouve sur eaqbe_server (qui doit disposer d'une API fonctionnelle et configurée) et qui recevra la requête à l'endpoint :/Unity/Search. L'API exécutera l'extraction des informations pour nous les transmettre sous le format spécifié, après vérification de nos droits (ABCDToken)
+
+<br /> 
+
+    | OrderID <br /> | CustomerID | ProductID| Date| Montant |
+    |:-----------:|:------------:|:-------------:|:--------------:|:--------------:|
+    | 16208 | 255 | 6425 | 08/08/2024| 45.28 |
+    | 16208 | 255 | 3498 | 08/08/2024| 55.64 | 
+    | 16208 | 255 | 1528 | 08/08/2024|  9.99 | 
+    | 16208 | 255 | 0056 | 14/08/2024| 13.50 |
+
+
+<br /> 
 
 ## Base de données relationnelle
 
 Une base de données relationnelle organise les informations dans des tables liées entre elles par des clés, chaque table étant structurée en lignes et colonnes. Elle utilise le langage SQL (Structured Query Language) pour interroger et manipuler ces données. Une base de données dite SQL permet une gestion efficace de l'information et est un choix privilégié pour de nombreuses applications. Bien que l'information dans une base de données relationnelle soit le type de source le plus adapté pour l'exploitation des données en informatique décisionnelle (réalisation de data visualization), un travail de remodélisation est toutefois nécessaire pour rendre l'interraction avec les visuels le plus efficient possible.
+
+![Image d'une base de données relationnelle](/Data Universe/Data_Source/BDrelation.jpg)
+
+
 
 ## Base de données non-relationnelle
 
@@ -39,7 +102,7 @@ Un data warehouse est un système centralisé qui intègre et stocke des donnée
 ## Data Mart 
 
 Un data mart estsous-ensemble d’un data warehouse qui organise les données selon des usages métiers ou des domaines ciblés. Il s'agit donc d'une vue limitée à certaine information qui ont été remodélisée selon le principe du star-schéma afin de rendre efficient toute exploitation de ces données par des systèmes d'analyse.
-
+git init
 ## Data Lake
 
 Un data lake est un vaste réservoir de données brutes, stockées dans leur format d'origine, sans modélisation préalable permettant de faire face au concept du BIG Data : les données sont variées (structurées, non structurées, semi-strucurées et proviennnet de plusieurs sources de manière simultanée), le volume et la vitesse de génération de l'information sont tellement importants qu'une base de données tranditionnelle ne pourrait répondre aux requêtes. Pour pouvoir stocker ces données de manière extrêmement rapide, les informations sont enregistrées sous-forme de clés valeurs et peuvent être reconstituées par la suite dans d'autres systèmes.
